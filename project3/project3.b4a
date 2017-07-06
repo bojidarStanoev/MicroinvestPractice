@@ -1,0 +1,76 @@
+﻿Version=7
+NumberOfModules=1
+Module1=Starter
+Build1=Default,b4a.example
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="19"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~
+IconFile=
+NumberOfFiles=0
+NumberOfLibraries=1
+Library1=core
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: B4A Example
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	'These variables can only be accessed from this module.
+	Dim Buttons(10) As Button
+	Dim col,row As Int
+	Dim OkButton As Button
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	'Do not forget to load the layout file created with the visual designer. For example:
+	'Activity.LoadLayout("Layout1")
+	
+	Dim i As Int
+	
+	
+	OkButton.Initialize("")
+	For i = 0 To 9
+		Buttons(i).Initialize("Buttons")
+		If row>4 Then
+			col = col+1
+			row = 0
+		End If
+		Activity.AddView(Buttons(i),row * 64dip, 128dip + (col  * 64dip), 64dip, 64dip)
+		row=row+1
+		Buttons(i).Tag = i+1
+		Buttons(i).Text = (i+1)
+	Next
+	Activity.AddView(OkButton, 192dip, 64dip, 64dip, 64dip)
+		
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+
+Sub Buttons_Click
+	
+	Dim temp As Button
+	temp = Sender
+	Msgbox("Button " &temp.Tag & " blicked","Clicked")
+
+End Sub
