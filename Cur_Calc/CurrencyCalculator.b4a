@@ -1,0 +1,281 @@
+﻿Version=7
+NumberOfModules=1
+Module1=Starter
+Build1=Default,b4a.example
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="19"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~
+IconFile=
+NumberOfFiles=0
+NumberOfLibraries=1
+Library1=core
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Currency Calculator
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: portrait
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	'These variables can only be accessed from this module.
+	Dim cur1,cur2 As AutoCompleteEditText
+	Dim curr_conv_rate As EditText
+	Dim bu1,bu2,back_but(7) As Button
+	Dim lb As Label
+	Dim ed1,ed2 As EditText
+	Dim item_list As List
+	Dim p1,p2,p3,p4,p5,p6,p7,p8 As Panel
+	Dim button(6) As Button
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	'Do not forget to load the layout file created with the visual designer. For example:
+	'Activity.LoadLayout("Layout1")
+	cur1.Initialize("")
+	cur2.Initialize("")
+	ed1.Initialize("")
+	ed2.Initialize("")
+	p1.Initialize("")
+	p2.Initialize("")
+	p3.Initialize("")
+	p4.Initialize("")
+	p5.Initialize("")
+	p6.Initialize("")
+	p7.Initialize("")
+	p8.Initialize("")
+	Dim i As Int
+	
+	curr_conv_rate.Initialize("")
+	lb.Initialize("")
+	bu2.Initialize("bu2")
+	bu1.Initialize("bu1")
+	For i=0 To 6
+		back_but(i).Initialize("back")
+		back_but(i).Tag = i + 1
+		back_but(i).Text="Back"
+	Next
+	
+	item_list.Initialize()
+	Activity.AddView(p1, 0, 0, 100%x, 100%y)
+	Activity.AddView(p2, 0, 0, 100%x, 100%y)
+	Activity.AddView(p3, 0, 0, 100%x, 100%y)
+	Activity.AddView(p4, 0, 0, 100%x, 100%y)
+	Activity.AddView(p5, 0, 0, 100%x, 100%y)
+	Activity.AddView(p6, 0, 0, 100%x, 100%y)
+	Activity.AddView(p7, 0, 0, 100%x, 100%y)
+	Activity.AddView(p8, 0, 0, 100%x, 100%y)
+	p1.AddView(cur1,200dip,40dip,100dip,40dip)
+	p1.AddView(cur2,200dip,100dip,100dip,40dip)
+	p1.AddView(ed1,50dip,40dip,100dip,40dip)
+	p1.AddView(ed2,50dip,100dip,100dip,40dip)
+	p1.AddView(lb,125dip,160dip,100dip,40dip)
+	p1.AddView(curr_conv_rate,120dip,215dip,110dip,40dip)
+	p1.AddView(bu1, 110dip, 270dip, 90dip, 60dip)
+	p1.AddView(bu2, 110dip, 340dip, 90dip, 60dip)
+ 
+	p2.AddView(back_but(0), 20dip, 360dip, 100dip, 40dip)
+	p3.AddView(back_but(1), 20dip, 360dip, 100dip, 40dip)
+	p4.AddView(back_but(2), 20dip, 360dip, 100dip, 40dip)
+	p5.AddView(back_but(3), 20dip, 360dip, 100dip, 40dip)
+	p6.AddView(back_but(4), 20dip, 360dip, 100dip, 40dip)
+	p7.AddView(back_but(5), 20dip, 360dip, 100dip, 40dip)
+	p8.AddView(back_but(6), 20dip, 360dip, 100dip, 40dip)
+	
+	cur1.Color=Colors.RGB(255,255,255)
+	cur2.Color=Colors.RGB(255,255,255)
+	curr_conv_rate.Color=Colors.RGB(255,255,255)
+	ed1.Color=Colors.RGB(255,255,255)
+	lb.Color=Colors.RGB(255,255,255)
+	ed2.Color=Colors.RGB(255,255,255)
+	cur1.TextColor=Colors.RGB(0,0,0)
+	cur2.TextColor=Colors.RGB(0,0,0)
+	curr_conv_rate.TextColor=Colors.RGB(0,0,0)
+	ed1.TextColor=Colors.RGB(0,0,0)
+	lb.TextColor=Colors.RGB(0,0,0)
+	ed1.TextColor= Colors.RGB(0,0,0)
+	ed2.TextColor = Colors.RGB(0,0,0)
+	lb.TextColor=Colors.Black
+	
+	lb.Text="Conversion Rate"
+	item_list.Add("$ Dollar")
+	item_list.Add("¥ Yuan")
+	item_list.Add("€ Euro")
+	item_list.Add("лв. BGN")
+	item_list.Add("CZK Koruna")
+	item_list.Add("RUB Ruble")
+	bu1.Text="Convert"
+	bu2.Text="rates"
+	ed1.InputType = ed1.INPUT_TYPE_DECIMAL_NUMBERS
+	ed2.InputType = ed2.INPUT_TYPE_DECIMAL_NUMBERS
+	curr_conv_rate.InputType = curr_conv_rate.INPUT_TYPE_DECIMAL_NUMBERS
+	
+	
+	cur1.SetItems(item_list)
+	cur2.SetItems(item_list)
+	Dim col,row As Int = 0
+	For i = 0 To 5
+		If row = 3 Then
+			col = col + 1
+			row = 0
+		End If
+		
+		button(i).Initialize("button")
+		p2.AddView(button(i), (row*60dip) + 80dip,(col*60dip) + 140dip, 50dip, 50dip)
+		
+		row = row + 1
+		button(i).Tag=i+1
+	Next
+	
+	
+	Visible
+	setButtonText
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+	
+End Sub
+
+Sub bu1_Click
+	
+	Dim res1,res2 As Double
+	Dim currency1,currency2,rate As Double
+	
+	If curr_conv_rate.Text <> "" Then
+	rate=curr_conv_rate.Text
+	Else
+		Msgbox("Input rate","OOOOOPPPPS")
+	End If
+	
+	
+	res1=0
+	res2=0
+	If ed1.Text <> ""   Then
+		currency1=ed1.Text
+		res1=currency1*rate
+	End If
+	If ed2.Text <> ""   Then
+		currency2=ed2.Text
+		res2=currency2/rate
+	End If
+	Msgbox("cur1: "& res1 & CRLF & "cur2: " &  res2,"RATES")
+	
+End Sub
+
+Sub bu2_Click
+	p1.Visible=False
+	p2.Visible=True
+
+End Sub
+
+Sub Back_Click
+	
+	Dim temp As Button
+	temp = Sender
+	Select temp.Tag	
+		Case 1
+			p2.Visible = False
+			p1.Visible = True
+		Case 2
+			p3.Visible = False
+			p2.Visible = True
+		Case 3
+			p4.Visible = False
+			p2.Visible = True
+		Case 4
+			p5.Visible = False
+			p2.Visible = True
+		Case 5	
+			p6.Visible = False
+			p2.Visible = True
+		Case 6
+			p7.Visible = False
+			p2.Visible = True
+		Case 7
+			p8.Visible = False
+			p2.Visible = True
+	End Select
+	
+	
+	
+End Sub
+
+Sub Button_Click
+	Dim temp As Button
+	temp = Sender
+	Dim myw As WebView
+	myw.Initialize("myw")
+	Select temp.Tag
+		
+			Case 1
+				p2.Visible=False
+				p3.Visible=True
+				p3.AddView(myw, 0, 0, 100%x, 75%y) 'Your options for size here
+				myw.LoadUrl("http://www.floatrates.com/daily/eur.xml")
+			Case 2
+				p2.Visible=False
+				p4.Visible=True
+				p4.AddView(myw, 0, 0, 100%x, 75%y) 'Your options for size here
+				myw.LoadUrl("http://www.floatrates.com/daily/usd.xml")
+			Case 3
+				p2.Visible = False
+				p5.Visible = True
+				p5.AddView(myw, 0, 0, 100%x, 75%y) 'Your options for size here
+				myw.LoadUrl("http://www.floatrates.com/daily/bgn.xml")
+			Case 4
+				p2.Visible = False
+				p6.Visible = True
+				p6.AddView(myw, 0, 0, 100%x, 75%y) 'Your options for size here
+				myw.LoadUrl("http://www.floatrates.com/daily/cny.xml")
+			Case 5
+				p2.Visible = False
+				p7.Visible = True
+				p7.AddView(myw, 0, 0, 100%x, 75%y) 'Your options for size here
+				myw.LoadUrl("http://www.floatrates.com/daily/czk.xml")
+			Case 6
+				p2.Visible = False
+				p8.Visible = True
+				p8.AddView(myw, 0, 0, 100%x, 75%y) 'Your options for size here
+				myw.LoadUrl("http://www.floatrates.com/daily/rub.xml")
+			
+				
+	End Select
+End Sub
+Sub Visible
+	p2.Visible=False
+	p3.Visible=False
+	p4.Visible=False
+	p5.Visible=False
+	p6.Visible=False
+	p7.Visible=False
+	p8.Visible = False
+End Sub
+Sub setButtonText
+	button(0).Text="€"
+	button(1).Text="$"
+	button(2).Text="Lv"
+	button(3).Text="¥"
+	button(4).Text="Kr"
+	button(5).Text="Rb"
+End Sub
+
+
+
+
+
