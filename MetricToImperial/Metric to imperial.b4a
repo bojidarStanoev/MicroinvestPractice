@@ -1,0 +1,229 @@
+﻿Version=7
+NumberOfModules=1
+Module1=Starter
+Build1=Default,b4a.example
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="19"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~
+IconFile=
+NumberOfFiles=0
+NumberOfLibraries=1
+Library1=core
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Metric to Imperial converter
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+	
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	'These variables can only be accessed from this module.
+	Dim start_screen_p,weight_p,length_p As Panel
+	Dim but_weight,but_length As Button
+	Dim lbs_lb,kg_lb As Label
+	Dim ed1,ed2,ed3,ed4 As EditText
+	Dim menu_metre,menu_imp As AutoCompleteEditText
+	Dim item_list1,item_list2 As List
+	Dim convert_weight_b, convert_length_b As Button
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	'Do not forget to load the layout file created with the visual designer. For example:
+	'Activity.LoadLayout("Layout1")
+	start_screen_p.Initialize("")
+	weight_p.Initialize("")
+	length_p.Initialize("")
+	but_weight.Initialize("but_weight")
+	but_length.Initialize("but_length")
+	lbs_lb.Initialize("")
+	kg_lb.Initialize("")
+	
+	ed1.Initialize("")
+	ed2.Initialize("")
+	ed3.Initialize("")
+	ed4.Initialize("")
+	menu_metre.Initialize("")
+	menu_imp.Initialize("")
+	item_list1.Initialize()
+	item_list2.Initialize()
+	
+	convert_length_b.Initialize("convert_length_b")
+	convert_weight_b.Initialize("convert_weight_b")
+	
+	Activity.AddView(start_screen_p, 0 , 0, 100%x, 100%y)
+	Activity.AddView(weight_p, 0, 0, 100%x, 100%y)
+	Activity.AddView(length_p, 0, 0, 100%x, 100%y)
+	
+	start_screen_p.AddView(but_weight, 50dip, 150dip, 90dip, 40dip)
+	start_screen_p.AddView(but_length, 160dip, 150dip, 90dip, 40dip)
+	
+	but_weight.Text = "Weight"
+	but_length.Text = "Length"
+	
+	weight_p.AddView(ed1, 30dip, 30dip, 70dip, 40dip)
+	weight_p.AddView(ed2, 30dip, 90dip, 70dip, 40dip)
+	ed1.Color = Colors.White
+	ed1.TextColor = Colors.Black
+	
+	ed2.Color = Colors.White
+	ed2.TextColor = Colors.Black
+	
+	weight_p.AddView(kg_lb, 110dip, 35dip, 30dip, 20dip)
+	weight_p.AddView(lbs_lb, 110dip, 95dip, 30dip, 20dip)
+	
+	weight_p.AddView(convert_weight_b, 120dip, 200dip, 130dip, 40dip)
+	
+	convert_weight_b.Text = "Convert"
+	
+	kg_lb.Text = "kg"
+	lbs_lb.Text = "lbs"
+	
+	ed1.InputType = ed1.INPUT_TYPE_DECIMAL_NUMBERS
+	ed2.InputType = ed2.INPUT_TYPE_DECIMAL_NUMBERS
+	
+	length_p.AddView(ed3, 30dip, 30dip, 50dip, 30dip)
+	length_p.AddView(ed4, 30dip, 90dip, 50dip, 30dip)
+	
+	ed3.Color = Colors.White
+	ed3.TextColor = Colors.Black
+	
+	ed4.Color = Colors.White
+	ed4.TextColor = Colors.Black
+	
+	ed3.InputType = ed3.INPUT_TYPE_DECIMAL_NUMBERS
+	ed4.InputType = ed4.INPUT_TYPE_DECIMAL_NUMBERS
+	
+	length_p.AddView(menu_metre, 100dip, 30dip, 100dip, 40dip)
+	length_p.AddView(menu_imp, 100dip, 80dip, 100dip, 40dip)
+	length_p.AddView(convert_length_b, 120dip, 200dip, 130dip, 40dip)
+	
+	convert_length_b.Text="Convert"
+	item_list1.Add("Inch")
+	item_list1.Add("Foot")
+	item_list1.Add("Yard")
+	item_list1.Add("Mile")
+	menu_imp.SetItems(item_list1)
+	
+	item_list2.Add("Km")
+	item_list2.Add("Metre")
+	menu_metre.SetItems(item_list2)
+	
+	menu_imp.TextColor = Colors.Black
+	menu_imp.Color = Colors.White
+	menu_metre.TextColor = Colors.Black
+	menu_metre.Color = Colors.White
+	
+	weight_p.Visible = False
+	length_p.Visible = False
+
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+Sub Activity_KeyPress (KeyCode As Int) As Boolean
+	If KeyCode=KeyCodes.KEYCODE_BACK Then
+		length_p.Visible=False
+		weight_p.Visible=False
+		start_screen_p.Visible=True
+		Return True
+		Else
+			Return False
+	End If
+End Sub
+Sub but_weight_Click
+	start_screen_p.Visible=False
+	weight_p.Visible=True
+	
+End Sub
+Sub but_length_Click
+	start_screen_p.Visible=False
+	length_p.Visible=True
+	
+End Sub
+
+Sub convert_length_b_Click
+	Dim meter,imp_unit,res1,res2 As Double = 0
+	If menu_metre.Text<>"" And menu_imp.Text<>"" Then
+		
+		If ed3.Text <> "" Then
+			meter=ed3.Text
+			If menu_metre.Text="Km" Then
+				meter = meter*1000
+			End If
+			If menu_imp.Text="Inch" Then
+				res1=meter*39.3700787
+			End If
+			If menu_imp.Text="Foot" Then
+				res1=meter*3.2808399 
+			End If
+			If menu_imp.Text="Yard" Then
+				res1=meter*1.0936133
+			End If
+			If menu_imp.Text="Mile" Then
+			res1=meter*0.000621371192
+			End If
+		End If
+		
+		If ed4.Text <> "" Then
+			imp_unit=ed4.Text
+			
+			If menu_metre.Text="Km" Then
+				imp_unit = imp_unit/1000
+			End If
+			If menu_imp.Text="Inch" Then
+				res2=imp_unit/39.3700787
+			End If
+			If menu_imp.Text="Foot" Then
+				res2=imp_unit/3.2808399
+			End If
+			If menu_imp.Text="Yard" Then
+				res2=imp_unit/1.0936133
+			End If
+			If menu_imp.Text="Mile" Then
+				res2=imp_unit/0.000621371192
+			End If
+			
+			
+			
+		End If
+			
+		Msgbox(menu_metre.Text & " to " & menu_imp.Text & ": " & res1 & CRLF & menu_imp.Text & " to  " & menu_metre.Text & ": " & res2 ,"conversion")
+		
+	End If
+	If menu_metre.Text="" Or menu_imp.Text="" Then
+		Msgbox("Please choose units from the dropdown menu!!! ","Opps")
+	End If
+
+End Sub
+
+Sub convert_weight_b_Click
+	Dim kg,lbs,res1,res2 As Double = 0
+
+	If ed1.Text<>"" Then
+		kg=ed1.Text
+		res1=kg*2.20462262
+	End If
+	If ed2.Text<>"" Then
+		lbs=ed2.Text
+		res2=lbs/2.20462262
+	End If
+	Msgbox("kg to lbs: " & res1 & CRLF & "lbs to kg: " & res2 ,"conversion")
+End Sub
