@@ -38,6 +38,7 @@ Sub Globals
 	Dim menu_metre,menu_imp As AutoCompleteEditText
 	Dim item_list1,item_list2 As List
 	Dim convert_weight_b, convert_length_b As Button
+	
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
@@ -50,7 +51,6 @@ Sub Activity_Create(FirstTime As Boolean)
 	but_length.Initialize("but_length")
 	lbs_lb.Initialize("")
 	kg_lb.Initialize("")
-	
 	ed1.Initialize("")
 	ed2.Initialize("")
 	ed3.Initialize("")
@@ -140,13 +140,22 @@ Sub Activity_Pause (UserClosed As Boolean)
 End Sub
 Sub Activity_KeyPress (KeyCode As Int) As Boolean
 	If KeyCode=KeyCodes.KEYCODE_BACK Then
-		length_p.Visible=False
-		weight_p.Visible=False
-		start_screen_p.Visible=True
-		Return True
-		Else
+		
+		If  start_screen_p.Visible==True Then
 			Return False
+		Else
+			length_p.Visible=False
+			weight_p.Visible=False
+			start_screen_p.Visible=True
+			Return True
+		End If
+		
+		
+			
+			
 	End If
+	
+	
 End Sub
 Sub but_weight_Click
 	start_screen_p.Visible=False
