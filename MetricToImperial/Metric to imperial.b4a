@@ -67,24 +67,24 @@ Sub Activity_Create(FirstTime As Boolean)
 	Activity.AddView(weight_p, 0, 0, 100%x, 100%y)
 	Activity.AddView(length_p, 0, 0, 100%x, 100%y)
 	
-	start_screen_p.AddView(but_weight, 50dip, 150dip, 90dip, 40dip)
-	start_screen_p.AddView(but_length, 160dip, 150dip, 90dip, 40dip)
+	start_screen_p.AddView(but_weight, 10.4%x, 18.75%y, 28.75%x, 10%y)
+	start_screen_p.AddView(but_length, 40.33%x, 18.75%y, 28.75%x, 10%y)
 	
 	but_weight.Text = "Weight"
 	but_length.Text = "Length"
 	
-	weight_p.AddView(ed1, 30dip, 30dip, 70dip, 40dip)
-	weight_p.AddView(ed2, 30dip, 90dip, 70dip, 40dip)
+	weight_p.AddView(ed1, 6.25%x, 4%y, 20%x, 9%y)
+	weight_p.AddView(ed2, 6.25%x, 16%y, 20%x, 9%y)
 	ed1.Color = Colors.White
 	ed1.TextColor = Colors.Black
 	
 	ed2.Color = Colors.White
 	ed2.TextColor = Colors.Black
 	
-	weight_p.AddView(kg_lb, 110dip, 35dip, 30dip, 20dip)
-	weight_p.AddView(lbs_lb, 110dip, 95dip, 30dip, 20dip)
+	weight_p.AddView(kg_lb, 29%x, 9%y, 7.25%x, 4%y)
+	weight_p.AddView(lbs_lb, 29%x, 17%y, 7.25%x, 4%y)
 	
-	weight_p.AddView(convert_weight_b, 120dip, 200dip, 130dip, 40dip)
+	weight_p.AddView(convert_weight_b, 25%x, 35%y, 30%x, 15%y)
 	
 	convert_weight_b.Text = "Convert"
 	
@@ -94,8 +94,8 @@ Sub Activity_Create(FirstTime As Boolean)
 	ed1.InputType = ed1.INPUT_TYPE_DECIMAL_NUMBERS
 	ed2.InputType = ed2.INPUT_TYPE_DECIMAL_NUMBERS
 	
-	length_p.AddView(ed3, 30dip, 30dip, 50dip, 30dip)
-	length_p.AddView(ed4, 30dip, 90dip, 50dip, 30dip)
+	length_p.AddView(ed3, 6.25%x, 4%y, 20%x, 9%y)
+	length_p.AddView(ed4, 6.25%x, 16%y, 20%x, 9%y)
 	
 	ed3.Color = Colors.White
 	ed3.TextColor = Colors.Black
@@ -106,9 +106,9 @@ Sub Activity_Create(FirstTime As Boolean)
 	ed3.InputType = ed3.INPUT_TYPE_DECIMAL_NUMBERS
 	ed4.InputType = ed4.INPUT_TYPE_DECIMAL_NUMBERS
 	
-	length_p.AddView(menu_metre, 100dip, 30dip, 100dip, 40dip)
-	length_p.AddView(menu_imp, 100dip, 80dip, 100dip, 40dip)
-	length_p.AddView(convert_length_b, 120dip, 200dip, 130dip, 40dip)
+	length_p.AddView(menu_metre, 29%x, 4%y, 25%x, 10%y)
+	length_p.AddView(menu_imp, 29%x, 16%y , 25%x, 10%y)
+	length_p.AddView(convert_length_b, 25%x, 35%y, 30%x, 15%y)
 	
 	convert_length_b.Text="Convert"
 	item_list1.Add("Inch")
