@@ -1,0 +1,90 @@
+﻿Version=7
+NumberOfModules=1
+Module1=Starter
+Build1=Default,b4a.example
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="19"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~
+IconFile=
+NumberOfFiles=0
+NumberOfLibraries=1
+Library1=core
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Random Images
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+	Dim time As Timer
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	'These variables can only be accessed from this module.
+	Dim panel1 As Panel
+	Dim image(10) As ImageView
+	Dim random As Int
+	Dim temp As Boolean = True
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	'Do not forget to load the layout file created with the visual designer. For example:
+	'Activity.LoadLayout("Layout1")
+	panel1.Initialize("panel1")
+	time.Initialize("time",2000)
+	time.Enabled=True
+	For i = 0 To 9
+		image(i).Initialize("")
+		image(i).Gravity=Gravity.FILL
+	Next
+	image(0).Bitmap=LoadBitmap(File.DirAssets,"nature-forest-industry-rails.jpg")
+	image(1).Bitmap=LoadBitmap(File.DirAssets,"buggati.jpg")
+	image(2).Bitmap=LoadBitmap(File.DirAssets,"flower.jpg")
+	image(3).Bitmap=LoadBitmap(File.DirAssets,"images.jpg")
+	image(4).Bitmap=LoadBitmap(File.DirAssets,"painted-lady-1568926_960_720.jpg")
+	image(5).Bitmap=LoadBitmap(File.DirAssets,"parapluie.jpg")
+	image(6).Bitmap=LoadBitmap(File.DirAssets,"images22.jpg")
+	image(7).Bitmap=LoadBitmap(File.DirAssets,"forest.jpg")
+	image(8).Bitmap=LoadBitmap(File.DirAssets,"water.jpg")
+	image(9).Bitmap=LoadBitmap(File.DirAssets,"meow.jpg")
+	
+	Activity.AddView(panel1, 0, 0, 100%x, 100%y)
+	panel1.AddView(image(1),0,0,100%x,100%y)
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+Sub time_Tick
+	panel1.RemoveAllViews
+	random=Rnd(0,9)
+	panel1.AddView(image(random),0,0,100%x,100%y)
+	
+End Sub
+
+Sub panel1_Click
+	If temp = True Then
+		time.Enabled=False
+		temp=False
+	Else
+		time.Enabled=True
+		temp=True
+	End If
+	
+	
+End Sub
